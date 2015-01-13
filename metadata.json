@@ -1,0 +1,27 @@
+{
+  "name": "buzzdeee-nfsserver",
+  "version": "0.1.0",
+  "author": "Sebastian Reitenbach",
+  "summary": "Puppet Module to manage an NFS server",
+  "license": "Apache-2.0",
+  "source": "https://github.com/buzzdeee/buzzdeee-nfsserver.git",
+  "project_page": "https://github.com/buzzdeee/buzzdeee-nfsserver",
+  "issues_url": "https://github.com/buzzdeee/buzzdeee-nfsserver/issues",
+  "dependencies": [
+    {"name":"jbeard-portmap"},
+    {"name":"puppetlabs-stdlib"}
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "OpenBSD",
+      "operatingsystemrelease": [
+        "5.6"
+      ]
+    }
+  ],
+  "tags": [
+    "OpenBSD",
+    "NFS"
+  ]
+}
+

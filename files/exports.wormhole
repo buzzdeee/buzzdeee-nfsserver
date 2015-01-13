@@ -1,0 +1,7 @@
+/export/alpha     -maproot=root:wheel 10.0.0.26
+/export/macppc    -maproot=root:wheel 10.0.0.24
+/export/macppc    -maproot=root:wheel 10.0.0.8
+/export/sparc     -maproot=root:wheel 10.0.0.21
+/export/sparc     -maproot=root:wheel 10.0.0.25
+/export/sparc64   -maproot=root:wheel 10.0.0.29
+/export/vax       -maproot=root:wheel 10.0.0.30

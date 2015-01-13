@@ -1,0 +1,10 @@
+# This file is managed via Puppet.
+# Do not edit manually.
+
+<% @exports.each do |comment, export| -%>
+# <%= comment %>
+  <%- if export['ensure'] != 'absent' -%>
+    <%- if export['directory'].is_a? Hash -%><%= export['directory'].keys[0] -%><% else -%><%= export['directory'] -%><% end -%>	<% if export['exportparams'] -%><%= export['exportparams'] %><% end -%> <% if export['clients'] -%><%= export['clients'] %><% end %>
+  <%- end -%>
+<% end -%>
+
