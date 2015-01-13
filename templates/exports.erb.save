@@ -1,2 +1,0 @@
-<%= directory %>	<% if @exportparams -%><%= exportparams %><% end -%> <% if @clients -%><%= clients %><% end -%>
-
