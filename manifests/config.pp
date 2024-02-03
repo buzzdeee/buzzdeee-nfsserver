@@ -8,21 +8,13 @@ class nfsserver::config (
 ) {
 
   each ($exports) |$name, $export| {
-    if (is_string($export['directory'])) {
-      if (!defined(File[$export['directory']])) {
-        file { $export['directory']:
-          ensure => 'directory',
-        }
-      }
-    } else {
-      $exportdir = values_at(keys($export['directory']),0)
-      if !defined(File["${exportdir}"]) {
-        file { $exportdir:
-          ensure => 'directory',
-          owner  => $export['directory']['owner'],
-          group  => $export['directory']['group'],
-          mode   => $export['directory']['mode'],
-        }
+    $exportdir = values_at(keys($export['directory']),0)
+    if !defined(File["${exportdir}"]) {
+      file { $exportdir:
+        ensure => 'directory',
+        owner  => $export['directory']['owner'],
+        group  => $export['directory']['group'],
+        mode   => $export['directory']['mode'],
       }
     }
   }
