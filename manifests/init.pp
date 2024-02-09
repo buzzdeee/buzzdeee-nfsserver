@@ -43,7 +43,7 @@ class nfsserver (
   String $statd_flags,
   String $lockd_flags,
   Boolean $service_enable,
-  Boolean $service_ensure,
+  Enum[running, stopped, 'running', 'stopped'] $service_ensure,
   Hash $exports = undef,
 ) {
 

@@ -9,7 +9,7 @@ class nfsserver::service (
   String $lockd_flags,
   String $statd_flags,
   Boolean $service_enable,
-  Boolean $service_ensure,
+  Enum[running, stopped, 'running', 'stopped'] $service_ensure,
 ) {
 
   if ! defined(Service['portmap']) {
