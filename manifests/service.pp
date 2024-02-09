@@ -2,14 +2,14 @@
 # Takes care about the NFS server related services.
 
 class nfsserver::service (
-  Bool $enable_lockd,
-  Bool $enable_statd,
+  Boolean $enable_lockd,
+  Boolean $enable_statd,
   String $nfsd_flags,
   String $mountd_flags,
   String $lockd_flags,
   String $statd_flags,
-  Bool $service_enable,
-  Bool $service_ensure,
+  Boolean $service_enable,
+  Boolean $service_ensure,
 ) {
 
   if ! defined(Service['portmap']) {
