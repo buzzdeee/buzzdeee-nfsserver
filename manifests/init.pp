@@ -45,7 +45,7 @@ class nfsserver (
   Boolean $service_enable,
   Boolean $service_ensure,
   Hash $exports = undef,
-) inherits nfsserver::params {
+) {
 
   class { 'nfsserver::config':
     exports => $exports,
