@@ -8,8 +8,12 @@
   "project_page": "https://github.com/buzzdeee/buzzdeee-nfsserver",
   "issues_url": "https://github.com/buzzdeee/buzzdeee-nfsserver/issues",
   "dependencies": [
-    {"name":"jbeard-portmap"},
-    {"name":"puppetlabs-stdlib"}
+    {
+      "name": "jbeard-portmap"
+    },
+    {
+      "name": "puppetlabs-stdlib"
+    }
   ],
   "operatingsystem_support": [
     {
@@ -19,9 +23,17 @@
       ]
     }
   ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">= 7.24 < 9.0.0"
+    }
+  ],
   "tags": [
     "OpenBSD",
     "NFS"
-  ]
+  ],
+  "pdk-version": "3.0.1",
+  "template-url": "https://github.com/puppetlabs/pdk-templates#3.0.1",
+  "template-ref": "tags/3.0.1-0-gd13288a"
 }
-

@@ -1,0 +1,8 @@
+nfsserver::enable_lockd: true
+nfsserver::enable_statd: true
+nfsserver::nfsd_flags: '-tun 4'
+nfsserver::mountd_flags: ''
+nfsserver::statd_flags: ''
+nfsserver::lockd_flags: ''
+nfsserver::service_enable: true
+nfsserver::service_ensure: 'running'
