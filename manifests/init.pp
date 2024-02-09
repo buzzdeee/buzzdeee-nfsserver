@@ -36,16 +36,16 @@
 # Copyright 2014 Your name here, unless otherwise noted.
 #
 class nfsserver (
-  $enable_lockd   = $::nfsserver::params::enable_lockd,
-  $enable_statd   = $::nfsserver::params::enable_statd,
-  $nfsd_flags     = $::nfsserver::params::nfsd_flags,
-  $mountd_flags   = $::nfsserver::params::mountd_flags,
-  $statd_flags    = $::nfsserver::params::statd_flags,
-  $lockd_flags    = $::nfsserver::params::lockd_flags,
-  $service_enable = $::nfsserver::params::service_enable,
-  $service_ensure = $::nfsserver::params::service_ensure,
-  $exports        = undef,
-) inherits nfsserver::params {
+  Boolean $enable_lockd,
+  Boolean $enable_statd,
+  String $nfsd_flags,
+  String $mountd_flags,
+  String $statd_flags,
+  String $lockd_flags,
+  Boolean $service_enable,
+  Enum[running, stopped, 'running', 'stopped'] $service_ensure,
+  Hash $exports = undef,
+) {
 
   class { 'nfsserver::config':
     exports => $exports,

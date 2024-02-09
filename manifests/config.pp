@@ -4,7 +4,7 @@
 # exist.
 
 class nfsserver::config (
-  $exports = undef,
+  Hash $exports = undef,
 ) {
 
   each ($exports) |$name, $export| {
