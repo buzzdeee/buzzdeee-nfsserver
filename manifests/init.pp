@@ -1,39 +1,51 @@
 # == Class: nfsserver
 #
-# Full description of class nfsserver here.
+# This class manages the nfssserver
 #
 # === Parameters
 #
-# Document parameters here.
+# [*enable_lockd*]
+#   Boolean: whether to enable lockd, default: true
 #
-# [*sample_parameter*]
-#   Explanation of what this parameter affects and what it defaults to.
-#   e.g. "Specify one or more upstream ntp servers as an array."
+# [*enable_statd*]
+#   Boolean: whether to enable statd, default: true
+#
+# [*nfsd_flags*]
+#   String: nfsd service flags, default: '-tun 4'
+#
+# [*mountd_flags*]
+#   String: mountd service flags, default: ''
+#
+# [*statd_flags*]
+#   String: statd service flags, default: ''
+#
+# [*lockd_flags*]
+#   String: lockd service flags, default: ''
+#
+# [*service_enable*]
+#   Boolean: Wether to enable the service, default: true
+#
+# [*service_ensure*]
+#   Enum[running, stopped]: The desired service state, default: 'running'
+#
+# [*exports*]
+#   Hash: describes the exports lines going into /etc/exports.
 #
 # === Variables
-#
-# Here you should define a list of variables that this module would require.
-#
-# [*sample_variable*]
-#   Explanation of how this variable affects the funtion of this class and if
-#   it has a default. e.g. "The parameter enc_ntp_servers must be set by the
-#   External Node Classifier as a comma separated list of hostnames." (Note,
-#   global variables should be avoided in favor of class parameters as
-#   of Puppet 2.6.)
 #
 # === Examples
 #
 #  class { nfsserver:
-#    servers => [ 'pool.ntp.org', 'ntp.local.company.com' ],
+#    exports => [ 'pool.ntp.org', 'ntp.local.company.com' ],
 #  }
 #
 # === Authors
 #
-# Sebastian Reitenbach <sebastia@openbsd.org>
+# Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 #
 # === Copyright
 #
-# Copyright 2014 Your name here, unless otherwise noted.
+# Copyright 2014 Sebastian Reitenbach, unless otherwise noted.
 #
 class nfsserver (
   Boolean $enable_lockd,
@@ -46,7 +58,6 @@ class nfsserver (
   Enum[running, stopped, 'running', 'stopped'] $service_ensure,
   Hash $exports = undef,
 ) {
-
   class { 'nfsserver::config':
     exports => $exports,
   }
@@ -62,7 +73,6 @@ class nfsserver (
     service_ensure => $service_ensure,
   }
 
-  Class['nfsserver::config'] ~>
-  Class['nfsserver::service']
-
+  Class['nfsserver::config']
+  ~> Class['nfsserver::service']
 }

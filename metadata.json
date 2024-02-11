@@ -10,9 +10,6 @@
   "dependencies": [
     {
       "name": "jbeard-portmap"
-    },
-    {
-      "name": "puppetlabs-stdlib"
     }
   ],
   "operatingsystem_support": [

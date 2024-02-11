@@ -1,15 +1,20 @@
+# == Class nfsserver::config
+#
 # Private class, do not use directly.
 # Takes care about the exports configuration,
 # and ensures that the exported directories
 # exist.
-
+#
+# === Parameters
+#
+# [*exports*]
+#   Hash: describes the exports lines going into /etc/exports.
 class nfsserver::config (
   Hash $exports = undef,
 ) {
-
   each ($exports) |$name, $export| {
     $exportdir = values_at(keys($export['directory']),0)
-    if !defined(File["${exportdir}"]) {
+    if !defined(File[$exportdir]) {
       file { $exportdir:
         ensure => 'directory',
         owner  => $export['directory']['owner'],

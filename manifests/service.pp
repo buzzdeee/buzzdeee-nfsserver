@@ -1,6 +1,34 @@
+# == Class: nfsserver::service
+#
 # Private class, do not use directly.
 # Takes care about the NFS server related services.
-
+#
+# === Parameters
+#
+# [*enable_lockd*]
+#   Boolean: whether to enable lockd, default: true
+# 
+# [*enable_statd*]
+#   Boolean: whether to enable statd, default: true
+#
+# [*nfsd_flags*]
+#   String: nfsd service flags, default: '-tun 4'
+#
+# [*mountd_flags*]
+#   String: mountd service flags, default: ''
+#
+# [*statd_flags*]
+#   String: statd service flags, default: ''
+#
+# [*lockd_flags*]
+#   String: lockd service flags, default: ''
+#
+# [*service_enable*]
+#   Boolean: Wether to enable the service, default: true
+#
+# [*service_ensure*]
+#   Enum[running, stopped]: The desired service state, default: 'running'
+#
 class nfsserver::service (
   Boolean $enable_lockd,
   Boolean $enable_statd,
@@ -11,7 +39,6 @@ class nfsserver::service (
   Boolean $service_enable,
   Enum[running, stopped, 'running', 'stopped'] $service_ensure,
 ) {
-
   if ! defined(Service['portmap']) {
     include portmap
   }
