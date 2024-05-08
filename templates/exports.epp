@@ -1,0 +1,11 @@
+# This file is managed via Puppet.
+# Do not edit manually.
+
+<%if $::nfsserver::exports { -%>
+<% $::nfsserver::exports.each |$comment, $export| { -%>
+# <%= $comment %>
+  <%- if $export['ensure'] != 'absent' { -%>
+    <%- if $export['directory'].is_a(Hash) { -%><%= $export['directory'].keys[0] %> <% } else { -%><%= $export['directory'] %> <% } -%>	<% if $export['exportparams'] { -%><%= $export['exportparams'] %> <% } -%> <% if $export['clients'] { -%><%= $export['clients'] %><% } %>
+  <%- } -%>
+<% } -%>
+<% } -%>

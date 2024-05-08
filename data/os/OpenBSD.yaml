@@ -6,3 +6,4 @@ nfsserver::statd_flags: ''
 nfsserver::lockd_flags: ''
 nfsserver::service_enable: true
 nfsserver::service_ensure: 'running'
+nfsserver::exports: {}

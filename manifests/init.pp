@@ -1,6 +1,6 @@
 # == Class: nfsserver
 #
-# This class manages the nfssserver
+# This class manages the nfsd, mountd, lockd, and statd.
 #
 # === Parameters
 #
@@ -29,15 +29,29 @@
 #   Enum[running, stopped]: The desired service state, default: 'running'
 #
 # [*exports*]
-#   Hash: describes the exports lines going into /etc/exports.
+#   Optional Hash: describes the exports lines going into /etc/exports.
 #
 # === Variables
 #
 # === Examples
 #
-#  class { nfsserver:
-#    exports => [ 'pool.ntp.org', 'ntp.local.company.com' ],
-#  }
+# In the very simplest case, you just include the following:
+#
+# include nfsserver
+#
+# Configuration example for Hiera:
+#
+# nfsserver::exports:
+#   export_node1:
+#     directory:
+#       /export/node1:
+#         owner: 'root'
+#         group: '0'
+#         mode: '0755'
+#     exportparams: '-ro -maproot=root:wheel'
+#     clients: "-network=192.168.0 -mask=255.255.255.0"
+#
+# consult man exports(5) for details about parameters.
 #
 # === Authors
 #
@@ -56,22 +70,10 @@ class nfsserver (
   String $lockd_flags,
   Boolean $service_enable,
   Enum[running, stopped, 'running', 'stopped'] $service_ensure,
-  Hash $exports = undef,
+  Optional[Hash] $exports,
 ) {
-  class { 'nfsserver::config':
-    exports => $exports,
-  }
-
-  class { 'nfsserver::service':
-    enable_lockd   => $enable_lockd,
-    enable_statd   => $enable_statd,
-    nfsd_flags     => $nfsd_flags,
-    mountd_flags   => $mountd_flags,
-    statd_flags    => $statd_flags,
-    lockd_flags    => $lockd_flags,
-    service_enable => $service_enable,
-    service_ensure => $service_ensure,
-  }
+  contain nfsserver::config
+  contain nfsserver::service
 
   Class['nfsserver::config']
   ~> Class['nfsserver::service']

@@ -1,0 +1,7 @@
+# This file is managed via Puppet.
+# Do not edit manually.
+
+# export_node1
+/export/node1 -ro -maproot=root:wheel node1.example.com 192.168.0.1
+# export_node2
+/export/node2 -ro -mapall=nobody -network=10.0.0 -mask=255.255.255.0

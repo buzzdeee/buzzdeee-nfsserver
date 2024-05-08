@@ -40,7 +40,8 @@ def changelog_future_release
   returnVal
 end
 
-PuppetLint.configuration.send('disable_relative')
+#PuppetLint.configuration.send('disable_relative')
+#PuppetLint.configuration.send('disable_only_variable_string')
 
 
 if Gem.loaded_specs.key? 'github_changelog_generator'

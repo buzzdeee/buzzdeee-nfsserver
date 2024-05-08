@@ -5,21 +5,19 @@
 # and ensures that the exported directories
 # exist.
 #
-# === Parameters
-#
-# [*exports*]
-#   Hash: describes the exports lines going into /etc/exports.
-class nfsserver::config (
-  Hash $exports = undef,
-) {
-  each ($exports) |$name, $export| {
-    $exportdir = values_at(keys($export['directory']),0)
-    if !defined(File["${exportdir}"]) {
-      file { $exportdir:
-        ensure => 'directory',
-        owner  => $export['directory']['owner'],
-        group  => $export['directory']['group'],
-        mode   => $export['directory']['mode'],
+class nfsserver::config {
+  each ($nfsserver::exports) |$name, $export| {
+    if $export['directory'] =~ String {
+      $exportdir = $export['directory']
+    } else {
+      $exportdir = values_at(keys($export['directory']),0)
+      if !defined(File["${exportdir}"]) {
+        file { $exportdir:
+          ensure => 'directory',
+          owner  => $export['directory']['owner'],
+          group  => $export['directory']['group'],
+          mode   => $export['directory']['mode'],
+        }
       }
     }
   }
@@ -28,6 +26,6 @@ class nfsserver::config (
     owner   => 'root',
     group   => '0',
     mode    => '0640',
-    content => template('nfsserver/exports.erb'),
+    content => epp('nfsserver/exports.epp'),
   }
 }
