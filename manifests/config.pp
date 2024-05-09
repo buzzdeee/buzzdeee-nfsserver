@@ -11,7 +11,7 @@ class nfsserver::config {
       $exportdir = $export['directory']
     } else {
       $exportdir = values_at(keys($export['directory']),0)
-      if !defined(File["${exportdir}"]) {
+      if !defined(File[$exportdir]) {
         file { $exportdir:
           ensure => 'directory',
           owner  => $export['directory']['owner'],
