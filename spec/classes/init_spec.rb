@@ -59,9 +59,9 @@ describe 'nfsserver' do
           export_node1: {
             directory: {
               '/export/node1': {
-                owner: 'root',
-                group: '0',
-                mode: '0755',
+                owner: 'user1',
+                group: '666',
+                mode: '0777',
               },
             },
             exportparams: '-ro -maproot=root:wheel',
@@ -97,9 +97,9 @@ describe 'nfsserver' do
     it {
       is_expected.to contain_file('/export/node1').with(
         ensure: 'directory',
-        owner: 'root',
-        group: '0',
-        mode: '0755',
+        owner: 'user1',
+        group: '666',
+        mode: '0777',
       )
     }
     it { is_expected.not_to contain_file('/export/node2') }

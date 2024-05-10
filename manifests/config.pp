@@ -11,12 +11,12 @@ class nfsserver::config {
       $exportdir = $export['directory']
     } else {
       $exportdir = values_at(keys($export['directory']),0)
-      if !defined(File["${exportdir}"]) {
+      if !defined(File[$exportdir[0]]) {
         file { $exportdir:
           ensure => 'directory',
-          owner  => $export['directory']['owner'],
-          group  => $export['directory']['group'],
-          mode   => $export['directory']['mode'],
+          owner  => $export['directory'][$exportdir[0]]['owner'],
+          group  => $export['directory'][$exportdir[0]]['group'],
+          mode   => $export['directory'][$exportdir[0]]['mode'],
         }
       }
     }
